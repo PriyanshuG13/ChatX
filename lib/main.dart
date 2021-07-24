@@ -1,64 +1,53 @@
+import 'package:chatx/helper/authenticate.dart';
+import 'package:chatx/helper/helperfunctions.dart';
+import 'package:chatx/views/chatrooms.dart';
 import 'package:flutter/material.dart';
-import 'Chats.dart';
 
-void main() => runApp(App());
-
-class App extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Flutter App',
-      home: Home(),
-    );
-  }
+void main() {
+  runApp(MyApp());
 }
 
-class Home extends StatefulWidget {
+class MyApp extends StatefulWidget {
+  // This widget is the root of your application.
   @override
-  State<StatefulWidget> createState() {
-    return _HomeState();
-  }
+  _MyAppState createState() => _MyAppState();
 }
 
-class _HomeState extends State<Home> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    Chats(Colors.indigo),
-    Chats(Colors.black),
-    Chats(Colors.white)
-  ];
+class _MyAppState extends State<MyApp> {
 
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
+  bool userIsLoggedIn;
+
+  @override
+  void initState() {
+    getLoggedInState();
+    super.initState();
+  }
+
+  getLoggedInState() async {
+    await HelperFunctions.getUserLoggedInSharedPreference().then((value){
+      setState(() {
+        userIsLoggedIn  = value;
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('ChatX'),
-        backgroundColor: Colors.indigo,
+    return MaterialApp(
+      title: 'ChatX',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Color(0xff145C9E),
+        scaffoldBackgroundColor: Color(0xff1F1F1F),
+        accentColor: Color(0xff007EF4),
+        fontFamily: "OverpassRegular",
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped, // new
-        currentIndex: _currentIndex, // this will be set when a new tab is tapped
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
-            title: new Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.mail),
-            title: new Text('Messages'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Profile')
-          ),
-        ],
+      home: userIsLoggedIn != null ?  userIsLoggedIn ? ChatRoom() : Authenticate()
+          : Container(
+        child: Center(
+          child: Authenticate(),
+        ),
       ),
     );
   }
