@@ -1,4 +1,4 @@
-# chatx
+# ChatX
 
 Chatting App for Android and iOS.
 
