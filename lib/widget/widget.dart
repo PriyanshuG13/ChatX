@@ -1,3 +1,4 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 
 Widget appBarMain(BuildContext context) {
@@ -11,7 +12,22 @@ Widget appBarMain(BuildContext context) {
   // );
   return AppBar(
     title: Text("ChatX"),
+    backgroundColor: Colors.redAccent,
   );
+}
+
+class CustomSnackBar {
+  CustomSnackBar(BuildContext context, Widget content,
+      {SnackBarAction snackBarAction, Color backgroundColor = Colors.green}) {
+    final SnackBar snackBar = SnackBar(
+        action: snackBarAction,
+        backgroundColor: backgroundColor,
+        content: content,
+        behavior: SnackBarBehavior.floating);
+
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 }
 
 InputDecoration textFieldInputDecoration(String hintText) {
@@ -29,5 +45,6 @@ TextStyle simpleTextStyle() {
 }
 
 TextStyle biggerTextStyle() {
-  return TextStyle(color: Colors.white, fontSize: 17);
+  return TextStyle(
+      color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold);
 }
