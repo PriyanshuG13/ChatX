@@ -113,7 +113,9 @@ class _ChatRoomState extends State<ChatRoom> {
                             ),
                             hintText: 'Search',
                             hintStyle: TextStyle(
-                                fontFamily: 'WorkSansSemiBold', fontSize: 18.0),
+                                fontFamily: 'WorkSansSemiBold',
+                                fontSize: 18.0,
+                                color: Colors.grey),
                           ),
                         )),
                     Container(
@@ -144,7 +146,8 @@ class ChatRoomsTile extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => Chat(userName: userName, chatRoomId: chatRoomId)));
+                builder: (context) =>
+                    Chat(userName: userName, chatRoomId: chatRoomId)));
       },
       child: Card(
           elevation: 2.0,
@@ -169,9 +172,10 @@ class ChatRoomsTile extends StatelessWidget {
               children: [
                 Container(
                     child: Icon(
-                      Icons.person,
-                      size: 80,
-                    )),
+                  Icons.person,
+                  size: 80,
+                  color: Colors.black,
+                )),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -187,6 +191,7 @@ class ChatRoomsTile extends StatelessWidget {
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'OverpassRegular',
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -196,6 +201,7 @@ class ChatRoomsTile extends StatelessWidget {
                               "Today",
                               style: TextStyle(
                                 fontSize: 16,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -209,6 +215,7 @@ class ChatRoomsTile extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: 'OverpassRegular',
+                          color: Colors.black,
                         ),
                         maxLines: 2,
                       ),

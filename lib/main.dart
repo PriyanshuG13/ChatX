@@ -36,11 +36,12 @@ class _MyAppState extends State<MyApp> {
       title: 'ChatX',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xff145C9E),
-        scaffoldBackgroundColor: Color(0xff1F1F1F),
-        accentColor: Color(0xff007EF4),
+        primaryColor: Colors.redAccent,
+        scaffoldBackgroundColor: Colors.black,
+        accentColor: Color(0xff2A75BC),
         fontFamily: "OverpassRegular",
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        brightness: Brightness.dark,
       ),
       home: userIsLoggedIn != null
           ? userIsLoggedIn

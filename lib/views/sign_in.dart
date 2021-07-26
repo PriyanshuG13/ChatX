@@ -29,9 +29,9 @@ class _SignInState extends State<SignIn> {
   AuthService authService = new AuthService();
   bool isLoading = false;
 
-  bool isEmail(String input) =>
-      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(input);
+  bool isEmail(String input) => RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(input);
 
   bool isPhone(String input) =>
       RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')
@@ -82,7 +82,10 @@ class _SignInState extends State<SignIn> {
                                     keyboardType: TextInputType.emailAddress,
                                     validator: (val) {
                                       if (!isEmail(val) && !isPhone(val)) {
-                                        CustomSnackBar(context, Text('Please enter a valid email.'));
+                                        CustomSnackBar(
+                                            context,
+                                            Text(
+                                                'Please enter a valid email.'));
                                       }
                                       return null;
                                     },
@@ -120,8 +123,11 @@ class _SignInState extends State<SignIn> {
                                     controller: loginPasswordController,
                                     obscureText: _obscureTextPassword,
                                     validator: (val) {
-                                      if(val.length < 6){
-                                        CustomSnackBar(context, Text('Password must be 6+ characters'));
+                                      if (val.length < 6) {
+                                        CustomSnackBar(
+                                            context,
+                                            Text(
+                                                'Password must be 6+ characters'));
                                       }
                                       return null;
                                     },

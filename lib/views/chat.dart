@@ -89,7 +89,8 @@ class _ChatState extends State<Chat> {
               alignment: Alignment.bottomCenter,
               width: MediaQuery.of(context).size.width,
               child: Container(
-                  padding: EdgeInsets.only(left: 15, right: 5, bottom: 30, top: 10),
+                  padding:
+                      EdgeInsets.only(left: 15, right: 5, bottom: 30, top: 10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       color: Colors.white),
@@ -103,7 +104,9 @@ class _ChatState extends State<Chat> {
                       border: InputBorder.none,
                       hintText: 'Message ...',
                       hintStyle: TextStyle(
-                          fontFamily: 'WorkSansSemiBold', fontSize: 18.0),
+                          fontFamily: 'WorkSansSemiBold',
+                          fontSize: 18.0,
+                          color: Colors.grey),
                       suffixIcon: GestureDetector(
                           onTap: () {
                             addMessage();
@@ -149,17 +152,14 @@ class MessageTile extends StatelessWidget {
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10),
                     bottomRight: Radius.circular(10)),
-            gradient:
-            LinearGradient(
+            gradient: LinearGradient(
                 colors: sendByMe
-                ? [Colors.redAccent, Color(0xff2A75BC)]
-                : [Color(0xff2A75BC), Colors.redAccent],
+                    ? [Colors.redAccent, Color(0xff2A75BC)]
+                    : [Color(0xff2A75BC), Colors.redAccent],
                 begin: FractionalOffset(0.0, 0.0),
                 end: FractionalOffset(1.0, 1.0),
                 stops: <double>[0.0, 1.0],
-                tileMode: TileMode.clamp
-            )
-        ),
+                tileMode: TileMode.clamp)),
         child: Text(message,
             textAlign: TextAlign.start,
             style: TextStyle(

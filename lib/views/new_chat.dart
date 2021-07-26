@@ -100,9 +100,10 @@ class _NewChatState extends State<NewChat> {
             children: [
               Container(
                   child: Icon(
-                    Icons.person,
-                    size: 75,
-                  )),
+                Icons.person,
+                size: 75,
+                color: Colors.black,
+              )),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -116,12 +117,13 @@ class _NewChatState extends State<NewChat> {
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OverpassRegular',
+                          color: Colors.black,
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 2,bottom: 5),
+                    padding: EdgeInsets.only(top: 2, bottom: 5),
                     child: Container(
                       width: 200,
                       child: Text(
@@ -130,6 +132,7 @@ class _NewChatState extends State<NewChat> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'OverpassRegular',
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -145,18 +148,16 @@ class _NewChatState extends State<NewChat> {
                     margin: EdgeInsets.symmetric(horizontal: 12),
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                     decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(6)
-                    ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(6)),
                     child: Icon(
                       Icons.message,
                       size: 40,
-                    )
-                ),
+                    )),
               )
             ],
           ),
-        )
-    );
+        ));
   }
 
   getChatRoomId(String a, String b) {
@@ -198,8 +199,7 @@ class _NewChatState extends State<NewChat> {
                 children: [
                   Container(
                       margin: EdgeInsets.all(5),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 14),
+                      padding: EdgeInsets.symmetric(horizontal: 14),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           color: Colors.white),
@@ -218,7 +218,9 @@ class _NewChatState extends State<NewChat> {
                           ),
                           hintText: 'Search',
                           hintStyle: TextStyle(
-                              fontFamily: 'WorkSansSemiBold', fontSize: 18.0),
+                              fontFamily: 'WorkSansSemiBold',
+                              fontSize: 18.0,
+                              color: Colors.grey),
                           suffixIcon: GestureDetector(
                               onTap: () {
                                 initiateSearch();

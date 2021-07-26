@@ -114,7 +114,8 @@ class _SignUpState extends State<SignUp> {
                             keyboardType: TextInputType.emailAddress,
                             validator: (val) {
                               if (!isEmail(val) && !isPhone(val)) {
-                                CustomSnackBar(context, Text('Please enter a valid email.'));
+                                CustomSnackBar(context,
+                                    Text('Please enter a valid email.'));
                               }
                               return null;
                             },
@@ -149,8 +150,9 @@ class _SignUpState extends State<SignUp> {
                             controller: signupPasswordController,
                             obscureText: _obscureTextPassword,
                             validator: (val) {
-                              if(val.length < 6){
-                                CustomSnackBar(context, Text('Enter Password 6+ characters'));
+                              if (val.length < 6) {
+                                CustomSnackBar(context,
+                                    Text('Enter Password 6+ characters'));
                               }
                               return null;
                             },
@@ -196,11 +198,14 @@ class _SignUpState extends State<SignUp> {
                             obscureText: _obscureTextConfirmPassword,
                             autocorrect: false,
                             validator: (val) {
-                              if(val.length < 6){
-                                CustomSnackBar(context, Text('Password must be 6+ characters'));
-                              } else if(val != signupPasswordController.text){
-                                CustomSnackBar(context, 
-                                    Text('Password and Confirm Password fields do not match'));
+                              if (val.length < 6) {
+                                CustomSnackBar(context,
+                                    Text('Password must be 6+ characters'));
+                              } else if (val != signupPasswordController.text) {
+                                CustomSnackBar(
+                                    context,
+                                    Text(
+                                        'Password and Confirm Password fields do not match'));
                               }
                               return null;
                             },

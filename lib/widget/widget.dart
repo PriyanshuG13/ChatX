@@ -18,7 +18,8 @@ Widget appBarMain(BuildContext context) {
 
 class CustomSnackBar {
   CustomSnackBar(BuildContext context, Widget content,
-      {SnackBarAction snackBarAction, Color backgroundColor = Colors.redAccent}) {
+      {SnackBarAction snackBarAction,
+      Color backgroundColor = Colors.redAccent}) {
     final SnackBar snackBar = SnackBar(
         action: snackBarAction,
         backgroundColor: backgroundColor,

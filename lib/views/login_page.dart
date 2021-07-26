@@ -55,8 +55,8 @@ class _LoginPageState extends State<LoginPage>
             children: <Widget>[
               Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height >= 700? 125: 30
-                  ),
+                      top:
+                          MediaQuery.of(context).size.height >= 700 ? 125 : 30),
                   child:
                       // Container(
                       //   width: 220,
