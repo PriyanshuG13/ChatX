@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:chatx/views/widgets/sign_in.dart';
-import 'package:chatx/views/widgets/sign_up.dart';
+import 'package:chatx/views/sign_in.dart';
+import 'package:chatx/views/sign_up.dart';
 import 'package:chatx/utils/bubble_indicator_painter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -44,9 +44,7 @@ class _LoginPageState extends State<LoginPage>
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-                colors: <Color>[
-                  Colors.redAccent, const Color(0xff2A75BC)
-                ],
+                colors: <Color>[Colors.redAccent, const Color(0xff2A75BC)],
                 begin: FractionalOffset(0.0, 0.0),
                 end: FractionalOffset(1.0, 1.0),
                 stops: <double>[0.0, 1.0],
@@ -56,18 +54,21 @@ class _LoginPageState extends State<LoginPage>
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 125.0),
-                child: Text(
-                  "ChatX",
-                  style: GoogleFonts.combo(
-                      color: Colors.white,
-                      textStyle: TextStyle(
-                          fontSize: 100,
-                          fontWeight: FontWeight.bold
-                      )
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height >= 700? 125: 30
                   ),
-                )
-              ),
+                  child:
+                      // Container(
+                      //   width: 220,
+                      //   child: Image.asset("assets/images/chatX_logo.png"),
+                      // )
+                      Text(
+                    "ChatX",
+                    style: GoogleFonts.combo(
+                        color: Colors.white,
+                        textStyle: TextStyle(
+                            fontSize: 100, fontWeight: FontWeight.bold)),
+                  )),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: _buildMenuBar(context),

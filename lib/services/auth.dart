@@ -1,3 +1,4 @@
+import 'package:chatx/helper/helperfunctions.dart';
 import 'package:chatx/models/user.dart';
 import 'package:chatx/views/chat.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -67,6 +68,7 @@ class AuthService {
 
   Future signOut() async {
     try {
+      HelperFunctions.saveUserLoggedInSharedPreference(false);
       return await _auth.signOut();
     } catch (e) {
       print(e.toString());

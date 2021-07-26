@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chatx/helper/helperfunctions.dart';
 import 'package:chatx/services/auth.dart';
 import 'package:chatx/services/database.dart';
-import 'package:chatx/views/chatrooms.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:chatx/helper/theme.dart';
 import 'package:chatx/widget/widget.dart';
+import 'home.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key key}) : super(key: key);
@@ -25,13 +25,14 @@ class _SignUpState extends State<SignUp> {
   bool _obscureTextPassword = true;
   bool _obscureTextConfirmPassword = true;
   bool isLoading = false;
-  bool isEmail(String input) => RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"
-  ).hasMatch(input);
 
-  bool isPhone(String input) => RegExp(
-      r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'
-  ).hasMatch(input);
+  bool isEmail(String input) => RegExp(
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(input);
+
+  bool isPhone(String input) =>
+      RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')
+          .hasMatch(input);
 
   AuthService authService = new AuthService();
   DatabaseMethods databaseMethods = new DatabaseMethods();
@@ -94,7 +95,8 @@ class _SignUpState extends State<SignUp> {
                               ),
                               hintText: 'Name',
                               hintStyle: TextStyle(
-                                  fontFamily: 'WorkSansSemiBold', fontSize: 16.0),
+                                  fontFamily: 'WorkSansSemiBold',
+                                  fontSize: 16.0),
                             ),
                           ),
                         ),
@@ -112,7 +114,7 @@ class _SignUpState extends State<SignUp> {
                             keyboardType: TextInputType.emailAddress,
                             validator: (val) {
                               if (!isEmail(val) && !isPhone(val)) {
-                                return 'Please enter a valid email or phone number.';
+                                CustomSnackBar(context, Text('Please enter a valid email.'));
                               }
                               return null;
                             },
@@ -129,7 +131,8 @@ class _SignUpState extends State<SignUp> {
                               ),
                               hintText: 'Email Address',
                               hintStyle: TextStyle(
-                                  fontFamily: 'WorkSansSemiBold', fontSize: 16.0),
+                                  fontFamily: 'WorkSansSemiBold',
+                                  fontSize: 16.0),
                             ),
                           ),
                         ),
@@ -146,9 +149,10 @@ class _SignUpState extends State<SignUp> {
                             controller: signupPasswordController,
                             obscureText: _obscureTextPassword,
                             validator: (val) {
-                              return val.length > 6
-                                  ? null
-                                  : "Enter Password 6+ characters";
+                              if(val.length < 6){
+                                CustomSnackBar(context, Text('Enter Password 6+ characters'));
+                              }
+                              return null;
                             },
                             autocorrect: false,
                             style: const TextStyle(
@@ -163,7 +167,8 @@ class _SignUpState extends State<SignUp> {
                               ),
                               hintText: 'Password',
                               hintStyle: const TextStyle(
-                                  fontFamily: 'WorkSansSemiBold', fontSize: 16.0),
+                                  fontFamily: 'WorkSansSemiBold',
+                                  fontSize: 16.0),
                               suffixIcon: GestureDetector(
                                 onTap: _toggleSignup,
                                 child: Icon(
@@ -191,9 +196,13 @@ class _SignUpState extends State<SignUp> {
                             obscureText: _obscureTextConfirmPassword,
                             autocorrect: false,
                             validator: (val) {
-                              return val.length > 6
-                                  ? null
-                                  : "Enter Password 6+ characters";
+                              if(val.length < 6){
+                                CustomSnackBar(context, Text('Password must be 6+ characters'));
+                              } else if(val != signupPasswordController.text){
+                                CustomSnackBar(context, 
+                                    Text('Password and Confirm Password fields do not match'));
+                              }
+                              return null;
                             },
                             style: const TextStyle(
                                 fontFamily: 'WorkSansSemiBold',
@@ -207,7 +216,8 @@ class _SignUpState extends State<SignUp> {
                               ),
                               hintText: 'Confirmation',
                               hintStyle: const TextStyle(
-                                  fontFamily: 'WorkSansSemiBold', fontSize: 16.0),
+                                  fontFamily: 'WorkSansSemiBold',
+                                  fontSize: 16.0),
                               suffixIcon: GestureDetector(
                                 onTap: _toggleSignupConfirm,
                                 child: Icon(
@@ -245,7 +255,8 @@ class _SignUpState extends State<SignUp> {
                   ],
                   gradient: LinearGradient(
                       colors: <Color>[
-                        Colors.redAccent, const Color(0xff2A75BC)
+                        Colors.redAccent,
+                        const Color(0xff2A75BC)
                       ],
                       begin: FractionalOffset(0.2, 0.2),
                       end: FractionalOffset(1.0, 1.0),
@@ -277,7 +288,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  void _toggleSignUpButton() async{
+  void _toggleSignUpButton() async {
     if (formKey.currentState.validate()) {
       setState(() {
         isLoading = true;
@@ -285,7 +296,7 @@ class _SignUpState extends State<SignUp> {
 
       await authService
           .signUpWithEmailAndPassword(
-          signupEmailController.text, signupPasswordController.text)
+              signupEmailController.text, signupPasswordController.text)
           .then((result) {
         if (result != null) {
           Map<String, String> userDataMap = {
@@ -302,7 +313,7 @@ class _SignUpState extends State<SignUp> {
               signupEmailController.text);
 
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => ChatRoom()));
+              context, MaterialPageRoute(builder: (context) => Home()));
         }
       });
     }

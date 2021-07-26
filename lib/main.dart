@@ -1,5 +1,5 @@
 import 'package:chatx/helper/helperfunctions.dart';
-import 'package:chatx/views/chatrooms.dart';
+import 'package:chatx/views/home.dart';
 import 'package:chatx/views/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: userIsLoggedIn != null
           ? userIsLoggedIn
-              ? ChatRoom()
+              ? Home()
               : LoginPage()
           : Container(
               child: Center(

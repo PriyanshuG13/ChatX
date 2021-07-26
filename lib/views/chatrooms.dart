@@ -1,12 +1,10 @@
 import 'package:chatx/helper/constants.dart';
 import 'package:chatx/helper/helperfunctions.dart';
-import 'package:chatx/helper/theme.dart';
-import 'package:chatx/services/auth.dart';
 import 'package:chatx/services/database.dart';
 import 'package:chatx/views/chat.dart';
-import 'package:chatx/views/login_page.dart';
-import 'package:chatx/views/search.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ChatRoom extends StatefulWidget {
   @override
@@ -15,6 +13,7 @@ class ChatRoom extends StatefulWidget {
 
 class _ChatRoomState extends State<ChatRoom> {
   Stream chatRooms;
+  TextEditingController searchController = TextEditingController();
 
   Widget chatRoomsList() {
     return StreamBuilder(
@@ -29,7 +28,7 @@ class _ChatRoomState extends State<ChatRoom> {
                     userName: snapshot.data.documents[index].data['chatRoomId']
                         .toString()
                         .replaceAll("_", "")
-                        .replaceAll(Constants.myName, ""),
+                        .replaceFirst(Constants.myName, "", 0),
                     chatRoomId:
                         snapshot.data.documents[index].data["chatRoomId"],
                   );
@@ -59,32 +58,74 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("ChatX"),
+        title: Text(
+          "ChatX",
+          style: GoogleFonts.combo(
+            color: Colors.white,
+            textStyle: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
         elevation: 0.0,
-        centerTitle: false,
         actions: [
           GestureDetector(
-            onTap: () {
-              AuthService().signOut();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
-            },
+            onTap: () {},
             child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.exit_to_app)),
-          )
+                padding: EdgeInsets.symmetric(vertical: 17, horizontal: 10),
+                child: Icon(
+                  Icons.edit,
+                  size: 25,
+                )),
+          ),
         ],
+        backgroundColor: Colors.black,
       ),
       body: Container(
-        child: chatRoomsList(),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.search),
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Search()));
-        },
+        child: ListView(
+          children: [
+            Container(
+                padding: EdgeInsets.all(5),
+                color: Colors.black,
+                child: Column(
+                  children: [
+                    Container(
+                        padding: EdgeInsets.symmetric(horizontal: 14),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                            color: Colors.white),
+                        child: TextField(
+                          controller: searchController,
+                          style: const TextStyle(
+                              fontFamily: 'WorkSansSemiBold',
+                              fontSize: 18.0,
+                              color: Colors.black),
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            icon: Icon(
+                              FontAwesomeIcons.search,
+                              color: Colors.black,
+                              size: 22.0,
+                            ),
+                            hintText: 'Search',
+                            hintStyle: TextStyle(
+                                fontFamily: 'WorkSansSemiBold', fontSize: 18.0),
+                          ),
+                        )),
+                    Container(
+                      margin: EdgeInsets.only(top: 15),
+                      height: 2.0,
+                      color: Colors.grey[700],
+                    ),
+                  ],
+                )),
+            chatRoomsList(),
+          ],
+        ),
       ),
     );
   }
@@ -103,42 +144,80 @@ class ChatRoomsTile extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => Chat(
-                      chatRoomId: chatRoomId,
-                    )));
+                builder: (context) => Chat(userName: userName, chatRoomId: chatRoomId)));
       },
-      child: Container(
-        color: Colors.black26,
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-        child: Row(
-          children: [
-            Container(
-              height: 30,
-              width: 30,
-              decoration: BoxDecoration(
-                  color: CustomTheme.colorAccent,
-                  borderRadius: BorderRadius.circular(30)),
-              child: Text(userName.substring(0, 1),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'OverpassRegular',
-                      fontWeight: FontWeight.w300)),
+      child: Card(
+          elevation: 2.0,
+          color: Colors.grey[800],
+          margin: EdgeInsets.symmetric(vertical: 2.5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Container(
+            height: 80,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
+              gradient: LinearGradient(
+                  colors: <Color>[Colors.redAccent, const Color(0xff2A75BC)],
+                  begin: FractionalOffset(0.0, 0.0),
+                  end: FractionalOffset(1.0, 1.0),
+                  stops: <double>[0.0, 1.0],
+                  tileMode: TileMode.clamp),
             ),
-            SizedBox(
-              width: 12,
+            child: Row(
+              children: [
+                Container(
+                    child: Icon(
+                      Icons.person,
+                      size: 80,
+                    )),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 10, bottom: 4),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 240,
+                            child: Text(
+                              userName,
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'OverpassRegular',
+                              ),
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              "Today",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: 200,
+                      child: Text(
+                        "Message",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'OverpassRegular',
+                        ),
+                        maxLines: 2,
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
-            Text(userName,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontFamily: 'OverpassRegular',
-                    fontWeight: FontWeight.w300))
-          ],
-        ),
-      ),
+          )),
     );
   }
 }
