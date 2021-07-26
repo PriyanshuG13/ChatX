@@ -58,17 +58,18 @@ class _LoginPageState extends State<LoginPage>
                       top:
                           MediaQuery.of(context).size.height >= 700 ? 125 : 30),
                   child:
-                      // Container(
-                      //   width: 220,
-                      //   child: Image.asset("assets/images/chatX_logo.png"),
-                      // )
-                      Text(
-                    "ChatX",
-                    style: GoogleFonts.combo(
-                        color: Colors.white,
-                        textStyle: TextStyle(
-                            fontSize: 100, fontWeight: FontWeight.bold)),
-                  )),
+                      Container(
+                        width: 300,
+                        child: Image.asset("assets/images/Logo.png"),
+                      )
+                  //     Text(
+                  //   "ChatX",
+                  //   style: GoogleFonts.combo(
+                  //       color: Colors.white,
+                  //       textStyle: TextStyle(
+                  //           fontSize: 100, fontWeight: FontWeight.bold)),
+                  // )
+                  ),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: _buildMenuBar(context),
