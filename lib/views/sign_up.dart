@@ -96,7 +96,8 @@ class _SignUpState extends State<SignUp> {
                               hintText: 'Name',
                               hintStyle: TextStyle(
                                   fontFamily: 'WorkSansSemiBold',
-                                  fontSize: 16.0),
+                                  fontSize: 16.0,
+                                  color: Colors.grey),
                             ),
                           ),
                         ),
@@ -133,7 +134,8 @@ class _SignUpState extends State<SignUp> {
                               hintText: 'Email Address',
                               hintStyle: TextStyle(
                                   fontFamily: 'WorkSansSemiBold',
-                                  fontSize: 16.0),
+                                  fontSize: 16.0,
+                                  color: Colors.grey),
                             ),
                           ),
                         ),
@@ -170,7 +172,8 @@ class _SignUpState extends State<SignUp> {
                               hintText: 'Password',
                               hintStyle: const TextStyle(
                                   fontFamily: 'WorkSansSemiBold',
-                                  fontSize: 16.0),
+                                  fontSize: 16.0,
+                                  color: Colors.grey),
                               suffixIcon: GestureDetector(
                                 onTap: _toggleSignup,
                                 child: Icon(
@@ -222,7 +225,8 @@ class _SignUpState extends State<SignUp> {
                               hintText: 'Confirmation',
                               hintStyle: const TextStyle(
                                   fontFamily: 'WorkSansSemiBold',
-                                  fontSize: 16.0),
+                                  fontSize: 16.0,
+                                  color: Colors.grey),
                               suffixIcon: GestureDetector(
                                 onTap: _toggleSignupConfirm,
                                 child: Icon(

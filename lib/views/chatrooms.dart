@@ -184,7 +184,7 @@ class ChatRoomsTile extends StatelessWidget {
                       child: Row(
                         children: [
                           Container(
-                            width: 240,
+                            width: 230,
                             child: Text(
                               userName,
                               style: TextStyle(

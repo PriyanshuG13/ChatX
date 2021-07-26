@@ -103,7 +103,8 @@ class _SignInState extends State<SignIn> {
                                       hintText: 'Email Address',
                                       hintStyle: TextStyle(
                                           fontFamily: 'WorkSansSemiBold',
-                                          fontSize: 17.0),
+                                          fontSize: 17.0,
+                                          color: Colors.grey),
                                     ),
                                   ),
                                 ),
@@ -145,7 +146,8 @@ class _SignInState extends State<SignIn> {
                                       hintText: 'Password',
                                       hintStyle: const TextStyle(
                                           fontFamily: 'WorkSansSemiBold',
-                                          fontSize: 17.0),
+                                          fontSize: 17.0,
+                                          color: Colors.grey),
                                       suffixIcon: GestureDetector(
                                         onTap: _toggleLogin,
                                         child: Icon(

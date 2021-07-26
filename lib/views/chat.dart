@@ -96,6 +96,7 @@ class _ChatState extends State<Chat> {
                       color: Colors.white),
                   child: TextField(
                     controller: messageEditingController,
+                    onSubmitted: addMessage(),
                     style: TextStyle(
                         fontFamily: 'WorkSansSemiBold',
                         fontSize: 18.0,
