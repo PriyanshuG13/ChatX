@@ -1,9 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.addictox.chatx">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+
    <application
-        android:label="chatx"
+        android:allowBackup="true"
+        android:label="ChatX"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round">
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true">
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
